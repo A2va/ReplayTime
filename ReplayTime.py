@@ -181,10 +181,10 @@ class Replay_UI(tk.Frame):
         path_name=file[:file.rfind('/')]
         i=1
         replay_file=[]
-        if(os.path.isfile(path_name +'/' + name + "1" + ".mcpr")):
+        if(os.path.isfile(f'{path_name}/{name}1.mcpr')):
             while(1):
-                if(os.path.isfile(path_name +'/' + name + str(i) + ".mcpr")):
-                    file_zip=zipfile.ZipFile(path_name + '/' + name + str(i) + ".mcpr",'r')
+                if(os.path.isfile(f'{path_name}/{name}{i}.mcpr')):
+                    file_zip=zipfile.ZipFile(f'{path_name}/{name}{i}.mcpr','r')
                     file=file_zip.open("metaData.json")
                     parsed_json=json.loads(file_zip.open("metaData.json").read())
                     replay_file.append(int(parsed_json["duration"]/1000))
