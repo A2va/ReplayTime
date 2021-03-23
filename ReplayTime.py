@@ -18,6 +18,7 @@ import tkinter as tk
 import tkinter.filedialog as filedialog
 import zipfile
 import os
+import datetime
 # ************************
 # Alert Class
 # ************************
@@ -283,23 +284,12 @@ class Replay_UI(tk.Frame):
             self.table.column_3[i].config(text=temp)
     #String to Hour "hh:mm:ss" -> s
     def string_to_second(self,string):
-        temp1 =tk.StringVar()
-        temp2 =tk.StringVar()
-        
-        temp1= string.partition(":")
-        temp2=temp1[2].partition(":")
-        hour=int(temp1[0])
-        min=int(temp2[0])
-        second=int(temp2[2])
-        return hour*3600 + min*60 + second
+        h, m, s = string.split(':')
+        return int(h) * 3600 + int(m) * 60 + int(s)
     #Second to String s -> "hh:mm:ss"
     def second_to_string(self,second_in):
-        hour=int(second_in/3600)
-        min=int((second_in/3600-hour)*60)
-        second=int((((second_in/3600-hour)*60)-min)*60)
-        
-        temp= str(hour) + ':'+ str(min) + ':'  + str(second)
-        return temp
+        return str(datetime.timedelta(seconds=second_in))
+
     def clear_entry(self):
         #Clear the entry
         self.name_Entry.delete(0, 'end')
